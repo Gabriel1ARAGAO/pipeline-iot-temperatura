@@ -28,7 +28,7 @@ def load_view(view_name: str) -> pd.DataFrame:
     return pd.read_sql(f"SELECT * FROM {view_name}", engine)
 
 # ─── CABEÇALHO ────────────────────────────────────────────────────────────────
-st.title("🌡️ Dashboard de Temperaturas IoT")
+st.title("Dashboard de Temperaturas IoT")
 st.markdown("Pipeline de dados com dispositivos IoT • PostgreSQL • Docker • Streamlit")
 st.divider()
 
@@ -37,15 +37,15 @@ engine = get_engine()
 df_raw = pd.read_sql("SELECT temperature, device_id FROM temperature_readings LIMIT 50000", engine)
 
 col1, col2, col3, col4 = st.columns(4)
-col1.metric("🌡️ Temp. Média Geral",  f"{df_raw['temperature'].mean():.1f} °C")
-col2.metric("🔥 Temp. Máxima",       f"{df_raw['temperature'].max():.1f} °C")
-col3.metric("❄️ Temp. Mínima",       f"{df_raw['temperature'].min():.1f} °C")
-col4.metric("📡 Dispositivos",       df_raw['device_id'].nunique())
+col1.metric("Temp. Média Geral",  f"{df_raw['temperature'].mean():.1f} °C")
+col2.metric("Temp. Máxima",       f"{df_raw['temperature'].max():.1f} °C")
+col3.metric("Temp. Mínima",       f"{df_raw['temperature'].min():.1f} °C")
+col4.metric("Dispositivos",       df_raw['device_id'].nunique())
 
 st.divider()
 
 # ─── GRÁFICO 1: Média por Dispositivo ─────────────────────────────────────────
-st.header("📡 Média de Temperatura por Dispositivo")
+st.header("Média de Temperatura por Dispositivo")
 df_avg = load_view("avg_temp_por_dispositivo")
 
 # Ordena do mais quente ao mais frio e cria labels
@@ -109,7 +109,7 @@ fig1.update_layout(
 )
 st.plotly_chart(fig1, width='stretch')
 # ─── GRÁFICO 2: Leituras por Hora ─────────────────────────────────────────────
-st.header("⏰ Padrão de Leituras ao Longo do Dia")
+st.header("Padrão de Leituras ao Longo do Dia")
 df_hora = load_view("leituras_por_hora")
 col_a, col_b = st.columns(2)
 
@@ -133,7 +133,7 @@ with col_b:
     st.plotly_chart(fig2b, width='stretch')
 
 # ─── GRÁFICO 3: Máximas e Mínimas por Dia ────────────────────────────────────
-st.header("📅 Variação Diária de Temperatura")
+st.header("Variação Diária de Temperatura")
 df_dia = load_view("temp_max_min_por_dia")
 fig3 = px.line(
     df_dia, x="data",
