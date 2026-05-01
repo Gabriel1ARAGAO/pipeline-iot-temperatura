@@ -72,5 +72,3 @@ O container Docker para ao desligar a máquina.
 Antes de rodar o dashboard novamente, sempre execute:
 ```bash
 docker start postgres-iot
-```
-```
