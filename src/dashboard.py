@@ -99,7 +99,7 @@ fig1 = px.bar(
     range_color=range_cor,          # ← força escala de cor local
     text="avg_temp",
     labels={"sensor_label": "Dispositivo", "avg_temp": "Temp. Média (°C)"},
-    title=f"{'🔥 Top' if ordem == 'Mais quentes primeiro' else '❄️ Bottom'} {top_n} dispositivos — temperatura média",
+    title="Temperatura Média",
     hover_data={"device_id": True}
 )
 fig1.update_traces(texttemplate="%{text:.1f}°C", textposition="outside")
@@ -107,7 +107,7 @@ fig1.update_layout(
     xaxis_tickangle=-45,
     coloraxis_colorbar=dict(title="Temp. (°C)")
 )
-st.plotly_chart(fig1, use_container_width=True)
+st.plotly_chart(fig1, width='stretch')
 # ─── GRÁFICO 2: Leituras por Hora ─────────────────────────────────────────────
 st.header("⏰ Padrão de Leituras ao Longo do Dia")
 df_hora = load_view("leituras_por_hora")
@@ -120,7 +120,7 @@ with col_a:
         labels={"hora": "Hora do Dia", "contagem": "Nº de Leituras"},
         title="Volume de leituras por hora"
     )
-    st.plotly_chart(fig2a, use_container_width=True)
+    st.plotly_chart(fig2a, width='stretch')
 
 with col_b:
     fig2b = px.bar(
@@ -130,7 +130,7 @@ with col_b:
         labels={"hora": "Hora do Dia", "temp_media": "Temp. Média (°C)"},
         title="Temperatura média por hora do dia"
     )
-    st.plotly_chart(fig2b, use_container_width=True)
+    st.plotly_chart(fig2b, width='stretch')
 
 # ─── GRÁFICO 3: Máximas e Mínimas por Dia ────────────────────────────────────
 st.header("📅 Variação Diária de Temperatura")
@@ -147,6 +147,6 @@ fig3 = px.line(
     }
 )
 fig3.update_layout(hovermode="x unified")
-st.plotly_chart(fig3, use_container_width=True)
+st.plotly_chart(fig3, width='stretch')
 
 st.caption("Fonte: Kaggle - Temperature Readings: IoT Devices | Desenvolvido com Python, PostgreSQL, Docker e Streamlit")
